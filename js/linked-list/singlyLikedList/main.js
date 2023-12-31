@@ -65,6 +65,40 @@ class LinkedList {
             current.next = node;
         }
     }
+
+    deleteNode() {
+        let current = this.head;
+        while(current.next.next !== null){
+            current = current.next;
+        }
+        current.next = null;
+    }
+    deleteNodeAtHead() {
+        let current = this.head;
+        this.head = current.next;
+    }
+    deleteNodeAtIndex(index) {
+        if(index < 0){
+            console.log('Index cannot be less than 0');
+            return
+        }
+        if(index === 0){
+            this.head = this.head.next;
+            return
+        }
+
+        let current = this.head;
+        let currentIndex = 0
+        while(current.next !== null && currentIndex < index - 1){
+            current = current.next;
+            currentIndex++;
+        }
+        if(current.next === null || current.next.next === null){
+            console.log('Index out of range');
+            return
+        }
+        current.next = current.next.next;
+    }
 }
 
 node1 = new Node(1);
@@ -88,5 +122,8 @@ node3.next = node4;
 list.insertNode(new Node(5));
 list.insertNodeAtHead(new Node(0));
 list.insertNodeAtIndex(new Node(24), 0);
+list.deleteNode()
+list.deleteNodeAtHead()
+list.deleteNodeAtIndex(5)
 // list.linkedListLength()
 list.printLinkedList();
